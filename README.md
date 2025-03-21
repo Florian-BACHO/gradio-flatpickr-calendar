@@ -17,15 +17,20 @@ import gradio as gr
 from gradio_calendar import Calendar
 import datetime
 
-def is_weekday(date: datetime.datetime):
-    return date.weekday() < 5
 
-demo = gr.Interface(is_weekday, 
-    [Calendar(type="datetime", label="Select a date", info="Click the calendar icon to bring up the calendar.")], 
-    gr.Label(label="Is it a weekday?"),
-    examples=["2023-01-01", "2023-12-11"],
-    cache_examples=True,
-    title="Is it a weekday?")
+def predict(date: datetime.datetime | tuple[datetime.datetime, datetime.datetime]) \
+        -> datetime.datetime | tuple[datetime.datetime, datetime.datetime]:
+    return date
+
+
+demo = gr.Interface(fn=predict,
+                    inputs=[Calendar(label="Select a date or a range of dates",
+                                     info="Click to bring up the calendar.",
+                                     mode="range", type="datetime")],
+                    outputs=Calendar(label="Selected date(s)", info="Here are the date(s) you selected:"),
+                    examples=["2023-01-01", ("2023-01-01", "2023-12-11")],
+                    cache_examples=True,
+                    title="Choose a date", )
 
 if __name__ == "__main__":
     demo.launch()
@@ -69,6 +74,19 @@ str | datetime.datetime
 
 </td>
 <td align="left"><code>"datetime"</code></td>
+<td align="left">None</td>
+</tr>
+
+<tr>
+<td align="left"><code>mode</code></td>
+<td align="left" style="width: 25%;">
+
+```python
+"date" | "range"
+```
+
+</td>
+<td align="left"><code>"date"</code></td>
 <td align="left">None</td>
 </tr>
 
@@ -270,8 +288,16 @@ The code snippet below is accurate in cases where the component is used as both 
 
  ```python
  def predict(
-     value: str | datetime.datetime | None
- ) -> str | datetime.datetime | None:
+     value: str
+    | datetime.datetime
+    | tuple[str, str]
+    | tuple[datetime.datetime, datetime.datetime]
+    | None
+ ) -> str
+    | datetime.datetime
+    | tuple[str, str]
+    | tuple[datetime.datetime, datetime.datetime]
+    | None:
      return value
  ```
  
