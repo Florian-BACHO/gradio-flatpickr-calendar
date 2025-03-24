@@ -7,13 +7,13 @@ requires = [
 build-backend = "hatchling.build"
 
 [project]
-name = "gradio_calendar"
-version = "0.0.7"
-description = "Gradio component for selecting dates or ranges of dates with a calendar 📆"
+name = "gradio_flatpickr_calendar"
+version = "0.0.1"
+description = "Gradio component for selecting dates or ranges of dates with a Flatpickr calendar 📆"
 readme = "README.md"
 license = "MIT"
 requires-python = ">=3.8"
-authors = [{ name = "YOUR NAME", email = "YOUREMAIL@domain.com" }]
+authors = [{ name = "Florian Bacho", email = "f.bacho@outlook.fr" }]
 keywords = ["gradio-custom-component", "gradio-template-Fallback", "time", "calendar", "forms"]
 # Add dependencies here
 dependencies = ["gradio>=4.0,<6.0"]
@@ -39,7 +39,7 @@ dev = ["build", "twine"]
 repository = "https://github.com/Florian-BACHO/gradio-flatpickr-calendar"
 
 [tool.hatch.build]
-artifacts = ["/backend/gradio_calendar/templates", "*.pyi"]
+artifacts = ["/backend/gradio_calendar/templates", "*.pyi", "/backend/gradio_flatpickr_calendar/templates"]
 
 [tool.hatch.build.targets.wheel]
 packages = ["/backend/gradio_calendar"]

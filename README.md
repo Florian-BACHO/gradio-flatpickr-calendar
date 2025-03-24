@@ -1,20 +1,20 @@
 
-# `gradio_calendar`
-<a href="https://pypi.org/project/gradio_calendar/" target="_blank"><img alt="PyPI - Version" src="https://img.shields.io/pypi/v/gradio_calendar"></a> <a href="https://github.com/freddyaboulton/gradio-calendar/issues" target="_blank"><img alt="Static Badge" src="https://img.shields.io/badge/Issues-white?logo=github&logoColor=black"></a> <a href="https://huggingface.co/spaces/freddyaboulton/gradio_calendar/discussions" target="_blank"><img alt="Static Badge" src="https://img.shields.io/badge/%F0%9F%A4%97%20Discuss-%23097EFF?style=flat&logoColor=black"></a>
+# `gradio_flatpickr_calendar`
+<img alt="Static Badge" src="https://img.shields.io/badge/version%20-%200.0.1%20-%20orange"> <a href="https://github.com/Florian-BACHO/gradio-flatpickr-calendar/issues" target="_blank"><img alt="Static Badge" src="https://img.shields.io/badge/Issues-white?logo=github&logoColor=black"></a> 
 
-Gradio component for selecting dates with a calendar 📆
+Gradio component for selecting dates or ranges of dates with a Flatpickr calendar 📆
 
 ## Installation
 
 ```bash
-pip install gradio_calendar
+pip install gradio_flatpickr_calendar
 ```
 
 ## Usage
 
 ```python
 import gradio as gr
-from gradio_calendar import Calendar
+from gradio_flatpickr_calendar import Calendar
 import datetime
 
 

@@ -1,5 +1,5 @@
 import gradio as gr
-from gradio_calendar import Calendar
+from gradio_flatpickr_calendar import Calendar
 import datetime
 
 
