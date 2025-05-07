@@ -1,6 +1,6 @@
 
 # `gradio_flatpickr_calendar`
-<img alt="Static Badge" src="https://img.shields.io/badge/version%20-%200.0.1%20-%20orange"> <a href="https://github.com/Florian-BACHO/gradio-flatpickr-calendar/issues" target="_blank"><img alt="Static Badge" src="https://img.shields.io/badge/Issues-white?logo=github&logoColor=black"></a> 
+<a href="https://pypi.org/project/gradio_flatpickr_calendar/" target="_blank"><img alt="PyPI - Version" src="https://img.shields.io/pypi/v/gradio_flatpickr_calendar"></a> <a href="https://github.com/Florian-BACHO/gradio-flatpickr-calendar/issues" target="_blank"><img alt="Static Badge" src="https://img.shields.io/badge/Issues-white?logo=github&logoColor=black"></a> 
 
 Gradio component for selecting dates or ranges of dates with a Flatpickr calendar 📆
 
@@ -30,7 +30,7 @@ demo = gr.Interface(fn=predict,
                     outputs=Calendar(label="Selected date(s)", info="Here are the date(s) you selected:"),
                     examples=["2023-01-01", ("2023-01-01", "2023-12-11")],
                     cache_examples=True,
-                    title="Choose a date", )
+                    title="Choose a date")
 
 if __name__ == "__main__":
     demo.launch()
@@ -259,6 +259,19 @@ float | None
 
 </td>
 <td align="left"><code>None</code></td>
+<td align="left">None</td>
+</tr>
+
+<tr>
+<td align="left"><code>date_format</code></td>
+<td align="left" style="width: 25%;">
+
+```python
+str
+```
+
+</td>
+<td align="left"><code>"%Y-%m-%d"</code></td>
 <td align="left">None</td>
 </tr>
 </tbody></table>

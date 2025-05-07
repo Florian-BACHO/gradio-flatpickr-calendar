@@ -8,7 +8,7 @@ build-backend = "hatchling.build"
 
 [project]
 name = "gradio_flatpickr_calendar"
-version = "0.0.1"
+version = "0.0.3"
 description = "Gradio component for selecting dates or ranges of dates with a Flatpickr calendar 📆"
 readme = "README.md"
 license = "MIT"
@@ -39,7 +39,7 @@ dev = ["build", "twine"]
 repository = "https://github.com/Florian-BACHO/gradio-flatpickr-calendar"
 
 [tool.hatch.build]
-artifacts = ["/backend/gradio_calendar/templates", "*.pyi", "/backend/gradio_flatpickr_calendar/templates"]
+artifacts = ["/backend/gradio_flatpickr_calendar/templates", "*.pyi"]
 
 [tool.hatch.build.targets.wheel]
-packages = ["/backend/gradio_calendar"]
+packages = ["/backend/gradio_flatpickr_calendar"]

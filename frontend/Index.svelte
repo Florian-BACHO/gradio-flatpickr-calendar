@@ -18,6 +18,7 @@
   export let interactive = true;
   export let gradio;
   export let mode: "single" | "range" = "single";
+  export let date_format: string = "%Y-%m-%d";
 
   let el: HTMLInputElement;
 
@@ -30,17 +31,19 @@
   }
 
   onMount(() => {
+    const jsDateFormat = date_format
+      .replace(/%Y/g, "Y")
+      .replace(/%m/g, "m")
+      .replace(/%d/g, "d");
+
     const options: flatpickr.Options.Options = {
       mode: mode === "range" ? "range" : "single",
-      dateFormat: "Y-m-d",
-      onChange: (selectedDates) => {
-        if (mode === "range" && selectedDates.length === 2) {
-          value = [
-            selectedDates[0].toISOString().split("T")[0],
-            selectedDates[1].toISOString().split("T")[0],
-          ];
-        } else if (mode === "single" && selectedDates.length === 1) {
-          value = selectedDates[0].toISOString().split("T")[0];
+      dateFormat: jsDateFormat,
+      onChange: (_dates, dateStr: string) => {
+        if (mode === "range") {
+          value = dateStr.split(" to ");
+        } else {
+          value = dateStr;
         }
         handle_change();
       },

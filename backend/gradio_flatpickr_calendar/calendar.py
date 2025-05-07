@@ -30,6 +30,7 @@ class Calendar(Component):
         render: Whether to render the component in the parent Blocks scope.
         load_fn: A function to run when the component is first loaded onto the page to set the intial value.
         every: Whether load_fn should be run on a fixed time interval.
+        date_format: The date format to use when using "string" type.
     """
 
     EVENTS = ["change", "input", "submit"]
@@ -42,8 +43,9 @@ class Calendar(Component):
                  min_width: int | None = None, interactive: bool | None = None, visible: bool = True,
                  elem_id: str | None = None, elem_classes: list[str] | str | None = None,
                  render: bool = True,
-                 load_fn: Callable[..., Any] | None = None, every: float | None = None):
-        self._format_str = "%Y-%m-%d"
+                 load_fn: Callable[..., Any] | None = None, every: float | None = None,
+                 date_format: str = "%Y-%m-%d"):
+        self.date_format = date_format
         self.type = type
         self.mode = mode
 
@@ -62,13 +64,13 @@ class Calendar(Component):
             if self.type == "string":
                 return start_date, end_date
             else:
-                return (datetime.datetime.strptime(start_date, self._format_str),
-                        datetime.datetime.strptime(end_date, self._format_str))
+                return (datetime.datetime.strptime(start_date, self.date_format),
+                        datetime.datetime.strptime(end_date, self.date_format))
         else:
             if self.type == "string":
                 return payload if self.mode == "date" else (payload, payload)
             else:
-                date = datetime.datetime.strptime(payload, self._format_str)
+                date = datetime.datetime.strptime(payload, self.date_format)
                 return date if self.mode == "date" else (date, date)
 
     def postprocess(self, value: str | datetime.datetime | tuple[str, str] |
@@ -77,12 +79,14 @@ class Calendar(Component):
             return None
 
         if isinstance(value, tuple):
-            return (f"{v.strftime(self._format_str) if isinstance(v := value[0], datetime.datetime) else v} to "  # type: ignore
-                    f"{v.strftime(self._format_str) if isinstance(v := value[1], datetime.datetime) else v}")  # type: ignore
+            return (f"{v.strftime(self.date_format) if isinstance(v := value[0], datetime.datetime) else v} to "  # type: ignore
+                    f"{v.strftime(self.date_format) if isinstance(v := value[1], datetime.datetime) else v}")  # type: ignore
         elif isinstance(value, str):
-            return datetime.datetime.strptime(value, self._format_str).strftime(self._format_str)
+            return datetime.datetime.strptime(value, self.date_format).strftime(self.date_format)
         elif isinstance(value, datetime.datetime):
-            return value.strftime(self._format_str)
+            return value.strftime(self.date_format)
+
+        return None
 
     def example_inputs(self):
         return "2023-01-01"

@@ -15,7 +15,7 @@ demo = gr.Interface(fn=predict,
                     outputs=Calendar(label="Selected date(s)", info="Here are the date(s) you selected:"),
                     examples=["2023-01-01", ("2023-01-01", "2023-12-11")],
                     cache_examples=True,
-                    title="Choose a date", )
+                    title="Choose a date")
 
 if __name__ == "__main__":
     demo.launch()
