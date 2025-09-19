@@ -9,3 +9,5 @@ __tmp/*
 node_modules
 flagged
 gradio_cached_examples
+.idea
+.venv

@@ -25,7 +25,6 @@
   function handle_change(): void {
     gradio.dispatch("change");
     if (!value_is_output) {
-      gradio.dispatch("submit");
       gradio.dispatch("input");
     }
   }
