@@ -29,6 +29,11 @@
     }
   }
 
+  function clear_value(): void {
+    value = null;
+    handle_change();
+  }
+
   onMount(() => {
     const jsDateFormat = date_format
       .replace(/%Y/g, "Y")
@@ -65,19 +70,31 @@
 >
   <label class:container>
     <BlockTitle {show_label} {info}>{label}</BlockTitle>
-    <input
-      type="text"
-      bind:this={el}
-      bind:value={value}
-      on:change={handle_change}
-      disabled={!interactive}
-    />
+    <div class="input-with-clear">
+      <input
+        type="text"
+        bind:this={el}
+        bind:value={value}
+        on:change={handle_change}
+        disabled={!interactive}
+      />
+      {#if interactive && !value_is_output}
+        <button class="clear-button" on:click={clear_value}>×</button>
+      {/if}
+    </div>
   </label>
 </Block>
 
 <style>
   label {
     display: block;
+    width: 100%;
+  }
+
+  .input-with-clear {
+    position: relative;
+    display: flex;
+    align-items: center;
     width: 100%;
   }
 
@@ -94,6 +111,7 @@
     font-size: var(--input-text-size);
     line-height: var(--line-sm);
     border: none;
+    padding-right: 2.5rem; /* Make space for the clear button */
   }
 
   input:disabled {
@@ -102,7 +120,7 @@
     opacity: 1;
   }
 
-  .container > input {
+  .container > .input-with-clear > input {
     border: var(--input-border-width) solid var(--input-border-color);
     border-radius: var(--input-radius);
   }
@@ -110,5 +128,23 @@
   input:focus {
     box-shadow: var(--input-shadow-focus);
     border-color: var(--input-border-color-focus);
+  }
+
+  .clear-button {
+    position: absolute;
+    right: 0.5rem;
+    top: 50%;
+    transform: translateY(-50%);
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    color: var(--body-text-color);
+    font-size: 1.5rem;
+    padding: 0;
+    line-height: 1;
+  }
+
+  .clear-button:hover {
+    color: var(--text-color-strong);
   }
 </style>

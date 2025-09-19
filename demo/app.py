@@ -5,7 +5,6 @@ import datetime
 
 def predict(date: datetime.datetime | tuple[datetime.datetime, datetime.datetime]) \
         -> datetime.datetime | tuple[datetime.datetime, datetime.datetime]:
-    print("prediction")
     return date
 
 
